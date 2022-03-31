@@ -1,0 +1,116 @@
+{
+  "name": "ya-disk-rest-api",
+  "version": "0.1.0",
+  "author": "Ilya Strus <strax1990@gmail.com>",
+  "description": "Yandex disk REST API",
+  "scripts": {
+    "dev": "vite",
+    "serve": "vite preview",
+    "build": "npm run build.code && npm run build.types",
+    "build.types": "tsc -p tsconfig.build.json",
+    "build.code": "vite build",
+    "lint": "eslint --ext .ts src",
+    "lint.strict": "eslint --ext .ts src --max-warnings 0",
+    "lint.fix": "eslint --ext .ts --fix src",
+    "check-types": "tsc",
+    "docs.build": "typedoc",
+    "docs.watch": "typedoc --watch",
+    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' TS_NODE_TRANSPILE_ONLY=true mocha --timeout 60000 -r ts-node/register -r tests/mocha-hooks.ts \"tests/*.spec.ts\"",
+    "prepublishOnly": "npm run build",
+    "semantic-release": "semantic-release"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/lib.umd.js",
+  "module": "./dist/lib.es.js",
+  "types": "./dist/types/index.d.ts",
+  "keywords": [
+    "yandex",
+    "yandex-api",
+    "yandex-disk"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/release-notes-generator": "^10.0.3",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "^17.0.23",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "chai": "^4.3.6",
+    "dotenv": "^16.0.0",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "mocha": "^9.2.2",
+    "semantic-release": "^19.0.2",
+    "ts-node": "^10.7.0",
+    "typedoc": "^0.22.13",
+    "typescript": "^4.6.3",
+    "vite": "^2.8.6"
+  },
+  "release": {
+    "branches": [
+      "master"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "angular",
+          "releaseRules": [
+            {
+              "type": "docs",
+              "release": "patch"
+            }
+          ],
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES"
+            ]
+          }
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "angular",
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES"
+            ]
+          }
+        }
+      ],
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md",
+            "package.json"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.26.1"
+  }
+}

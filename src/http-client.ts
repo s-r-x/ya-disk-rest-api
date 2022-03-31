@@ -35,8 +35,7 @@ export class HttpClient implements IHttpClient {
         throw e;
       }
       throw new HttpError({
-        // originalError: e,
-        originalError: 1,
+        originalError: e,
         headers: e.response?.headers ?? {},
         code: e.response?.status,
         message: JSON.stringify(

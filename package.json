@@ -2,7 +2,7 @@
   "name": "ya-disk-rest-api",
   "version": "0.1.0",
   "author": "Ilya Strus <strax1990@gmail.com>",
-  "description": "Yandex disk REST API",
+  "description": "Тщательно типизированная и задокументированная обертка над Yandex Disk REST API",
   "scripts": {
     "dev": "vite",
     "serve": "vite preview",
@@ -27,8 +27,9 @@
   "types": "./dist/types/index.d.ts",
   "keywords": [
     "yandex",
-    "yandex-api",
-    "yandex-disk"
+    "yandex-disk",
+    "яндекс",
+    "яндекс-диск"
   ],
   "license": "MIT",
   "publishConfig": {

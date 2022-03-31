@@ -12,7 +12,6 @@ describe('YaOauth', () => {
       const res = await auth.refreshToken({
         refreshToken: process.env.REFRESH_TOKEN!,
       });
-      console.log(res);
       expect(res.access_token).to.be.a('string');
       expect(res.refresh_token).to.be.a('string');
       expect(res.expires_in).to.be.a('number');

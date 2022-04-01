@@ -219,6 +219,10 @@ export class YaDisk {
   /**
    * Создать папку
    * {@link https://yandex.ru/dev/disk/api/reference/create-folder.html}
+   * @example
+   * ```ts
+   * await disk.createDir('dir-path');
+   * ```
    */
   public async createDir(path: string): Promise<ILink> {
     const res = await this._http.request<ILink>({
@@ -279,6 +283,14 @@ export class YaDisk {
   /**
    * Переместить файл или папку
    * {@link https://yandex.ru/dev/disk/api/reference/move.html}
+   * @example
+   * ```ts
+   *await disk.move({
+   *  from: 'path-from.txt',
+   *  to: 'path-to.txt',
+   *  overwrite: true
+   * })
+   * ```
    */
   public async move(params: IMoveParams): Promise<ILink> {
     const res = await this._http.request<ILink>({
@@ -296,6 +308,10 @@ export class YaDisk {
   /**
    * Опубликовать ресурс
    * {@link https://yandex.ru/dev/disk/api/reference/publish.html#publish-q}
+   * @example
+   * ```ts
+   *  await disk.publish({ path: 'path-to-publish.txt' });
+   * ```
    */
   public async publish(params: IPublishParams): Promise<ILink> {
     const res = await this._http.request<ILink>({
@@ -308,6 +324,10 @@ export class YaDisk {
   /**
    * Отменить публикацию ресурса
    * {@link https://yandex.ru/dev/disk/api/reference/publish.html#unpublish-q}
+   * @example
+   * ```ts
+   *  await disk.unpublish({ path: 'path-to-unpublish.txt' });
+   * ```
    */
   public async unpublish(params: IUnpublishParams): Promise<ILink> {
     const res = await this._http.request<ILink>({
@@ -488,7 +508,7 @@ export class YaDisk {
   /**
    * Получить содержимое Корзины
    */
-  public async getTrash(params: IGetTrashParams): Promise<TGetTrashRes> {
+  public async getTrash(params: IGetTrashParams = {}): Promise<TGetTrashRes> {
     const res = await this._http.request<TGetTrashRes>({
       method: 'GET',
       url: YA_DISK_TRASH_URL,
@@ -505,8 +525,18 @@ export class YaDisk {
   /**
    * Очистить корзину
    * {@link https://yandex.ru/dev/disk/api/reference/trash-delete.html}
+   * @example
+   * ```ts
+   * // полная очистка
+   * await disk.clearTrash();
+   * ```
+   * @example
+   * ```ts
+   * // удаление конкретного ресурса
+   * await disk.clearTrash({ path: 'path-to-remove.txt' });
+   * ```
    */
-  public async clearTrash(params: IClearTrashParams): Promise<ILink> {
+  public async clearTrash(params: IClearTrashParams = {}): Promise<ILink> {
     const res = await this._http.request<ILink>({
       method: 'DELETE',
       url: YA_DISK_TRASH_URL,
@@ -520,6 +550,13 @@ export class YaDisk {
   /**
    * Восстановить ресурс из Корзины
    * {@link https://yandex.ru/dev/disk/api/reference/trash-restore.html}
+   * @example
+   * ```ts
+   * await disk.restoreTrash({
+   *  path: 'path-to-restore.txt',
+   *  overwrite: true
+   * });
+   * ```
    */
   public async restoreTrash(params: IRestoreTrashParams): Promise<ILink> {
     const res = await this._http.request<ILink>({

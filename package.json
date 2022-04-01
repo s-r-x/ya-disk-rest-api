@@ -1,6 +1,6 @@
 {
   "name": "ya-disk-rest-api",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Ilya Strus <strax1990@gmail.com>",
   "description": "Тщательно типизированная и задокументированная обертка над Yandex Disk REST API",
   "scripts": {

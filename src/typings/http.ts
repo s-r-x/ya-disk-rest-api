@@ -1,4 +1,5 @@
 import type { Method } from 'axios';
+import type { HttpError } from '..';
 import type { Dict } from './utils';
 
 export type THeaders = Dict<string>;
@@ -18,4 +19,6 @@ export interface IReqParams {
 }
 export interface IHttpClient {
   request<T>(params: IReqParams): Promise<THttpClientRes<T>>;
+  isHttpError(e: any): e is HttpError;
+  setAuthToken(token: string): void;
 }

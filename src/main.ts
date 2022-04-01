@@ -36,9 +36,11 @@ import type {
   IUpdateItemMetadataParams,
   IIsItemExistParams,
 } from './typings/yandex';
+import type { IHttpClient } from './typings/http';
+import type { HttpError } from './errors/http';
 
 export class YaDisk {
-  private _http: HttpClient;
+  private _http: IHttpClient;
   private _token: string;
 
   /**
@@ -400,6 +402,7 @@ export class YaDisk {
    *  file: fs.createReadStream("./file.txt"),
    * })
    * ```
+   * @example
    * ```ts
    * await disk.upload({
    *  path: "ya-disk-file.txt",
@@ -530,5 +533,25 @@ export class YaDisk {
       },
     });
     return res.data;
+  }
+  /**
+   * проверить была ли выброшенная ошибка инстансом {@link HttpError}
+   * @example
+   * ```ts
+   * try {
+   *  await disk.getMetadata();
+   * } catch(e) {
+   *  if(disk.isHttpError(e)) {
+   *    // тип сужен до HttpError
+   *    if(e.code === 404) {
+   *      // ...
+   *    }
+   *  }
+   * }
+   * ```
+   * @param e - ошибка
+   */
+  public isHttpError(e: any): e is HttpError {
+    return this._http.isHttpError(e);
   }
 }

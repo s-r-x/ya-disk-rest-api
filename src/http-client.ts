@@ -13,6 +13,7 @@ export class HttpClient implements IHttpClient {
       client.defaults.headers.common.Authorization = authToken;
       client.defaults.maxBodyLength = Infinity;
       client.defaults.maxContentLength = Infinity;
+      client.defaults.maxRedirects = 0;
     }
     this._client = client;
   }

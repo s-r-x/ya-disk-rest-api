@@ -11,6 +11,8 @@ export class HttpClient implements IHttpClient {
     });
     if (authToken) {
       client.defaults.headers.common.Authorization = authToken;
+      client.defaults.maxBodyLength = Infinity;
+      client.defaults.maxContentLength = Infinity;
     }
     this._client = client;
   }

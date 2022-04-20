@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/s-r-x/ya-disk-rest-api/compare/v1.1.1...v1.1.2) (2022-04-20)
+
+
+### Bug Fixes
+
+* maxRedirects: 0 для axios ([b0008b6](https://github.com/s-r-x/ya-disk-rest-api/commit/b0008b63a75961d1997db3dd4bb2fc603f6c5e43))
+
 ## [1.1.1](https://github.com/s-r-x/ya-disk-rest-api/compare/v1.1.0...v1.1.1) (2022-04-20)
 
 

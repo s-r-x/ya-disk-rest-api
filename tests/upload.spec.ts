@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { createReadStream } from 'fs';
-import { createApi } from './utils';
+import { createApi, createRandomName } from './utils';
 import { TEST_BINARY_FILE } from './constants';
 
 describe('upload', () => {
@@ -9,7 +9,7 @@ describe('upload', () => {
     let error: any;
     try {
       await api.upload({
-        path: 'new-file.txt',
+        path: createRandomName() + '.txt',
         overwrite: true,
         file: TEST_BINARY_FILE,
       });
@@ -26,7 +26,7 @@ describe('upload', () => {
       const stream = createReadStream(TEST_BINARY_FILE, 'binary');
       await api.upload({
         file: stream,
-        path: 'new-file.txt',
+        path: createRandomName() + '.txt',
         overwrite: true,
       });
     } catch (e) {
@@ -41,7 +41,7 @@ describe('upload', () => {
     try {
       const buff = Buffer.from('hello world', 'utf-8');
       await api.upload({
-        path: 'new-file.txt',
+        path: createRandomName() + '.txt',
         overwrite: true,
         file: buff,
       });
